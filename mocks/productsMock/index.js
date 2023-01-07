@@ -35,4 +35,10 @@ export default [
     quantidade: 10,
     entrega: "São Paulo",
   },
+  {
+    id: 6,
+    nameProduct: "Pepsi 2 litros",
+    quantidade: 10,
+    entrega: null,
+  },
 ];

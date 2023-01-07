@@ -1,5 +1,7 @@
-import { Delivery } from './components/delivery'
+import { Delivery } from "./components/delivery";
+import styles from "./styles.module.scss";
 
+// não esta verificando itens dentro da lista
 interface LogisticaProps {
   produtos: {
     id: number;
@@ -16,7 +18,6 @@ enum deliverysAccess {
   SãoPaulo = "plane",
 }
 
-
 export const Logistica: React.FC<LogisticaProps> = ({
   produtos,
 }: LogisticaProps) => {
@@ -25,15 +26,24 @@ export const Logistica: React.FC<LogisticaProps> = ({
   produtos?.map((produto) => (citiesDelivery[produto.entrega] = produto));
 
   return (
-    <div>
+    <div className={styles.background}>
       {produtos?.map((produto, index) => {
-        const typeOfDelivery = deliverysAccess[produto.entrega.split(" ").join("")];
-        if (typeOfDelivery) return <Delivery key={index} produto={produto} typeDelivery={typeOfDelivery} />
-        else return (
-          <div>
-            <h4>Sem Entrega disponivel</h4>
-          </div>
-        );
+        const typeOfDelivery =
+          deliverysAccess[produto?.entrega?.split(" ").join("")];
+        if (typeOfDelivery)
+          return (
+            <Delivery
+              key={index}
+              produto={produto}
+              typeDelivery={typeOfDelivery}
+            />
+          );
+        else
+          return (
+            <div className={styles.text}>
+              <h4>Sem Entrega disponivel</h4>
+            </div>
+          );
       })}
     </div>
   );
